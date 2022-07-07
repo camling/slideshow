@@ -1,7 +1,9 @@
 "use strict";
 [];
+;
 let config_object;
 let event_array = [];
+let layout_array = ["left", "right", "middle", "top", "bottom"];
 let current_index = 0;
 let container = document.getElementById("container");
 function get_current_events() {
@@ -19,7 +21,7 @@ function get_current_events() {
 }
 function remove_tags(str) {
     if ((str === null) || (str === ''))
-        return false;
+        return "";
     else
         str = str.toString();
     return str.replace(/(<([^>]+)>)/ig, '');
@@ -43,12 +45,16 @@ function format_date(date) {
 function create_link(id) {
     return `https://${config_object.library_id}.evanced.info/signup/EventDetails?EventId=${id}`;
 }
-function progress_bar() {
+function choose_layout_index() {
+    return Math.floor(Math.random() * layout_array.length);
+}
+function progress_bar(color_index) {
     let progress_bar = document.createElement("div");
     let progress_bar_fill = document.createElement("span");
     progress_bar.classList.add("progress_bar");
     progress_bar_fill.classList.add("progress_bar_fill");
     progress_bar_fill.style.animation = `linear progress-bar ${config_object.rotation_speed}s`;
+    progress_bar_fill.style.backgroundColor = config_object.colors[color_index].text;
     progress_bar.appendChild(progress_bar_fill);
     if (container != null) {
         container.appendChild(progress_bar);
@@ -59,13 +65,16 @@ function random_color_index() {
 }
 function create_slide() {
     let color_index = random_color_index();
+    let layout_class = layout_array[choose_layout_index()];
     if (container != null) {
         container.innerHTML = "";
+        container.className = "";
         let title_element = document.createElement("h1");
         let description_element = document.createElement("p");
         let duration_element = document.createElement("h2");
         let date_element = document.createElement("h2");
         container.classList.add("container");
+        container.classList.add(layout_class);
         container.style.backgroundColor = config_object.colors[color_index].body;
         title_element.classList.add("event_title");
         title_element.style.color = config_object.colors[color_index].text;
@@ -91,7 +100,29 @@ function create_slide() {
         container.appendChild(description_element);
         container.appendChild(duration_element);
         container.appendChild(date_element);
-        progress_bar();
+        if (config_object.show_qr_code === true) {
+            let qr_element = document.createElement("div");
+            container.appendChild(qr_element);
+            // @ts-ignore
+            new QRCode(qr_element, {
+                text: event_array[current_index].link,
+                width: 200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                // @ts-ignore
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+        if (event_array[current_index].image !== "") {
+            console.log(event_array[current_index].image);
+            let image_element = document.createElement("img");
+            image_element.src = event_array[current_index].image;
+            image_element.alt = event_array[current_index].image_alt;
+            image_element.classList.add("event_image");
+            container.appendChild(image_element);
+        }
+        progress_bar(color_index);
         if (current_index < event_array.length) {
             current_index++;
         }
