@@ -1,4 +1,20 @@
 {
     "name" : "Mount Prospect Public Library",
-    "library_id" : "mppl"
+    "library_id" : "mppl",
+    "rotation_speed" : 30,
+    "font" : "Open Sans",
+    "colors" : [
+        {"body": "#2f7278", "text": "white"},
+        {"body": "#97cc39", "text": "white"},
+        {"body": "#97cc39", "text": "black"},
+        {"body": "#ebff00", "text": "black"},
+        {"body": "#e37617", "text": "white"},
+        {"body": "#a90da6", "text": "white"},
+        {"body": "#a98bd0", "text": "white"},
+        {"body": "#2e0065", "text": "white"},
+        {"body": "#133475", "text": "white"},
+        {"body": "#143476", "text": "white"},
+        {"body": "#328ee3", "text": "white"},
+        {"body": "#b4e2f0", "text": "black"}
+        ]
 }
