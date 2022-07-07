@@ -1,7 +1,11 @@
 
+interface colors_array { body: string, text: string }[];
+interface colors_array extends Array<colors_array>{}
 
-let config_object:{ library_id: string, name: string };
+let config_object:{ library_id: string, name: string, rotation_speed: number, font: string , colors:colors_array};
 let event_array:any = [];
+let current_index:number = 0;
+let container = document.getElementById("container") as HTMLElement | null;
 
 function get_current_events()
     {
@@ -22,7 +26,7 @@ function get_current_events()
     }
 
    
-function remove_tags(str) {
+function remove_tags(str:string) {
   if ((str===null) || (str===''))
   return false;
   else
@@ -30,19 +34,19 @@ function remove_tags(str) {
   return str.replace( /(<([^>]+)>)/ig, '');
 }
 
-function format_am_pm(date) {
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
+function format_am_pm(date:Date) {
+  let hours:number = date.getHours();
+  let minutes:number | string = date.getMinutes();
   let ampm = hours >= 12 ? 'pm' : 'am';
   hours = hours % 12;
   hours = hours ? hours : 12; // the hour '0' should be '12'
-  minutes = minutes < 10 ? '0'+minutes : minutes;
+  minutes = minutes < 10 ? '0'+ minutes : minutes;
   let strTime = hours + ':' + minutes + ' ' + ampm;
   return strTime;
 }
 
 
-function format_date(date)
+function format_date(date:Date)
 {
   const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -51,8 +55,83 @@ function format_date(date)
   return display_date;
 }
 
+function create_link(id:number)
+{
+  return `https://${config_object.library_id}.evanced.info/signup/EventDetails?EventId=${id}`;
+}
+
+function progress_bar()
+{
+  let progress_bar:HTMLElement = document.createElement("div");
+  let progress_bar_fill:HTMLElement = document.createElement("span");
+
+  progress_bar.classList.add("progress_bar");
+  progress_bar_fill.classList.add("progress_bar_fill");
+  progress_bar_fill.style.animation = `linear progress-bar ${config_object.rotation_speed}s`;
+
+  progress_bar.appendChild(progress_bar_fill);
+
+  if(container != null)
+  {
+    container.appendChild(progress_bar);
+  }
+ 
+}
+
+function random_color_index()
+{
+
+return Math.floor(Math.random()* config_object.colors.length);
+
+
+}
+
 function create_slide()
 {
+
+  let color_index = random_color_index();
+  if(container != null)
+  {
+    container.innerHTML = "";
+    
+
+
+    let title_element:HTMLHeadingElement = document.createElement("h1");
+    let description_element:HTMLElement = document.createElement("p");
+
+    container.classList.add("container");
+    container.style.backgroundColor = config_object.colors[color_index].body;
+    title_element.classList.add("event_title");
+    title_element.style.color = config_object.colors[color_index].text;
+    description_element.classList.add("event_description");
+    description_element.style.color = config_object.colors[color_index].text;
+
+
+    let title_text:Text = document.createTextNode(event_array[current_index].title);
+    let description_text:Text = document.createTextNode(event_array[current_index].description);
+
+    title_element.appendChild(title_text);
+    description_element.appendChild(description_text);
+
+    container.appendChild(title_element);
+    container.appendChild(description_element);
+
+
+    progress_bar();
+
+    if(current_index < event_array.length)
+    {
+      current_index++;
+    }
+    else
+    {
+      current_index = 0;
+    }
+
+    setTimeout(create_slide,config_object.rotation_speed * 1000);
+
+  }
+  
 
 }
 
@@ -69,11 +148,12 @@ fetch("./main.json")
     get_current_events().then(events => {
       
         events.forEach(event => {
-          let date = new Date(event.EventStart);
-          let display_date = format_date(date);
-          let display_time = format_am_pm(date);
-          event_array.push({"id":event.EventId, "title":event.Title, "date":display_date, "time":display_time});
+          let date:Date = new Date(event.EventStart);
+          let display_date:string = format_date(date);
+          let display_time:string = format_am_pm(date);
+          event_array.push({"id":event.EventId, "title":event.Title, "description":remove_tags(event.Description),"date":display_date, "time":display_time, "image":event.Image, "image_alt":event.ImageAlt, "room":event.SpaceName, "link":create_link(event.EventId), "length":event.EventLength});
         });
       console.log(event_array);
+      create_slide();
       });
 });
