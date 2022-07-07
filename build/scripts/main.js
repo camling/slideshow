@@ -60,6 +60,24 @@ function progress_bar(color_index) {
         container.appendChild(progress_bar);
     }
 }
+function get_heading_size(length) {
+    console.log(length);
+    let size;
+    switch (true) {
+        case (length < 20):
+            size = "5em";
+            break;
+        case (length < 30):
+            size = "4em";
+            break;
+        case (length < 50):
+            size = "3em";
+            break;
+        default:
+            size = "2.5em";
+    }
+    return size;
+}
 function random_color_index() {
     return Math.floor(Math.random() * config_object.colors.length);
 }
@@ -79,6 +97,8 @@ function create_slide() {
         title_element.classList.add("event_title");
         title_element.style.color = config_object.colors[color_index].text;
         title_element.style.fontFamily = config_object.font;
+        title_element.style.fontSize = get_heading_size(event_array[current_index].title.length);
+        console.log(get_heading_size(event_array[current_index].title.length));
         description_element.classList.add("event_description");
         description_element.style.color = config_object.colors[color_index].text;
         description_element.style.fontFamily = config_object.font;
@@ -102,6 +122,7 @@ function create_slide() {
         container.appendChild(date_element);
         if (config_object.show_qr_code === true) {
             let qr_element = document.createElement("div");
+            qr_element.classList.add("qr_code");
             container.appendChild(qr_element);
             // @ts-ignore
             new QRCode(qr_element, {
@@ -123,7 +144,7 @@ function create_slide() {
             container.appendChild(image_element);
         }
         progress_bar(color_index);
-        if (current_index < event_array.length) {
+        if (current_index < event_array.length - 1) {
             current_index++;
         }
         else {
