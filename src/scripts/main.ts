@@ -99,6 +99,7 @@ function create_slide()
     let title_element:HTMLHeadingElement = document.createElement("h1");
     let description_element:HTMLElement = document.createElement("p");
     let duration_element:HTMLHeadingElement = document.createElement("h2");
+    let date_element:HTMLHeadElement = document.createElement("h2");
 
     container.classList.add("container");
     container.style.backgroundColor = config_object.colors[color_index].body;
@@ -114,18 +115,25 @@ function create_slide()
     duration_element.style.color = config_object.colors[color_index].text;
     duration_element.style.fontFamily = config_object.font;
 
+    date_element.classList.add("date");
+    date_element.style.color = config_object.colors[color_index].text;
+    date_element.style.fontFamily = config_object.font;
+
 
     let title_text:Text = document.createTextNode(event_array[current_index].title);
     let description_text:Text = document.createTextNode(event_array[current_index].description);
     let duration_text:Text = document.createTextNode(`${event_array[current_index].length} minutes`);
+    let date_text:Text = document.createTextNode(event_array[current_index].date);
 
     title_element.appendChild(title_text);
     description_element.appendChild(description_text);
     duration_element.appendChild(duration_text);
+    date_element.appendChild(date_text);
 
     container.appendChild(title_element);
     container.appendChild(description_element);
     container.appendChild(duration_element);
+    container.appendChild(date_element);
 
 
     progress_bar();
