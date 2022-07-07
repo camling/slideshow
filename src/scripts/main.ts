@@ -1,9 +1,9 @@
-
 interface colors_array { body: string, text: string }[];
-interface colors_array extends Array<colors_array>{}
+interface colors_array extends Array<colors_array>{};
 
 let config_object:{ library_id: string, name: string, rotation_speed: number, font: string , colors:colors_array, show_qr_code: boolean};
 let event_array:any = [];
+let layout_array:any = ["left","right","middle","top","bottom"];
 let current_index:number = 0;
 let container = document.getElementById("container") as HTMLElement | null;
 
@@ -28,7 +28,7 @@ function get_current_events()
    
 function remove_tags(str:string) {
   if ((str===null) || (str===''))
-  return false;
+  return "";
   else
   str = str.toString();
   return str.replace( /(<([^>]+)>)/ig, '');
@@ -60,7 +60,13 @@ function create_link(id:number)
   return `https://${config_object.library_id}.evanced.info/signup/EventDetails?EventId=${id}`;
 }
 
-function progress_bar()
+function choose_layout_index()
+{
+  return Math.floor(Math.random()* layout_array.length);
+}
+
+
+function progress_bar(color_index)
 {
   let progress_bar:HTMLElement = document.createElement("div");
   let progress_bar_fill:HTMLElement = document.createElement("span");
@@ -68,6 +74,7 @@ function progress_bar()
   progress_bar.classList.add("progress_bar");
   progress_bar_fill.classList.add("progress_bar_fill");
   progress_bar_fill.style.animation = `linear progress-bar ${config_object.rotation_speed}s`;
+  progress_bar_fill.style.backgroundColor = config_object.colors[color_index].text;
 
   progress_bar.appendChild(progress_bar_fill);
 
@@ -90,19 +97,22 @@ function create_slide()
 {
 
   let color_index = random_color_index();
+  let layout_class = layout_array[choose_layout_index()];
   if(container != null)
   {
-    container.innerHTML = "";
     
-
-
+    container.innerHTML = "";
+    container.className = "";
+    
     let title_element:HTMLHeadingElement = document.createElement("h1");
     let description_element:HTMLElement = document.createElement("p");
     let duration_element:HTMLHeadingElement = document.createElement("h2");
     let date_element:HTMLHeadElement = document.createElement("h2");
 
     container.classList.add("container");
+    container.classList.add(layout_class);
     container.style.backgroundColor = config_object.colors[color_index].body;
+    
     title_element.classList.add("event_title");
     title_element.style.color = config_object.colors[color_index].text;
     title_element.style.fontFamily = config_object.font;
@@ -134,9 +144,38 @@ function create_slide()
     container.appendChild(description_element);
     container.appendChild(duration_element);
     container.appendChild(date_element);
+    
+    if(config_object.show_qr_code === true)
+    {
+
+    let qr_element = document.createElement("div");
+    container.appendChild(qr_element);
+     // @ts-ignore
+        new QRCode(qr_element, {
+          text: event_array[current_index].link,
+          width: 200,
+          height: 200,
+          colorDark : "#000000",
+          colorLight : "#ffffff",
+          // @ts-ignore
+          correctLevel : QRCode.CorrectLevel.H
+        });
+      
+    }
+   
+    if(event_array[current_index].image !== "")
+    {
+      console.log(event_array[current_index].image);
+      let image_element:HTMLImageElement = document.createElement("img");
+      image_element.src = event_array[current_index].image;
+      image_element.alt = event_array[current_index].image_alt;
+      image_element.classList.add("event_image");
+      container.appendChild(image_element);
+    }
+    
 
 
-    progress_bar();
+    progress_bar(color_index);
 
     if(current_index < event_array.length)
     {
