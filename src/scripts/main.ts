@@ -5,7 +5,7 @@ let event_array:any = [];
 
 function get_current_events()
     {
-      async function fetchAllCalendarEvents() 
+      async function fetch_all_calendar_events() 
         {
           
             const response = await fetch(`https://${config_object.library_id}.evanced.info/api/signup/eventlist?isOngoingVisible=true&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=false`);
@@ -16,13 +16,13 @@ function get_current_events()
             const events = await response.json();
             return events;
         }
-        let all_events = fetchAllCalendarEvents();
+        let all_events = fetch_all_calendar_events();
     
         return all_events;
     }
 
    
-function removeTags(str) {
+function remove_tags(str) {
   if ((str===null) || (str===''))
   return false;
   else
@@ -30,7 +30,7 @@ function removeTags(str) {
   return str.replace( /(<([^>]+)>)/ig, '');
 }
 
-function formatAMPM(date) {
+function format_am_pm(date) {
   let hours = date.getHours();
   let minutes = date.getMinutes();
   let ampm = hours >= 12 ? 'pm' : 'am';
@@ -42,7 +42,7 @@ function formatAMPM(date) {
 }
 
 
-function formatDate(date)
+function format_date(date)
 {
   const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -51,6 +51,10 @@ function formatDate(date)
   return display_date;
 }
 
+function create_slide()
+{
+
+}
 
 
 fetch("./main.json")
@@ -66,13 +70,10 @@ fetch("./main.json")
       
         events.forEach(event => {
           let date = new Date(event.EventStart);
-          let display_date = formatDate(date);
-          let display_time = formatAMPM(date);
+          let display_date = format_date(date);
+          let display_time = format_am_pm(date);
           event_array.push({"id":event.EventId, "title":event.Title, "date":display_date, "time":display_time});
         });
       console.log(event_array);
       });
 });
-
-
-
