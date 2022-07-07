@@ -4,6 +4,7 @@
     "rotation_speed" : 30,
     "font" : "Open Sans",
     "logo": "",
+    "show_qr_code": true,
     "colors" : [
         {"body": "#2f7278", "text": "white"},
         {"body": "#97cc39", "text": "white"},
