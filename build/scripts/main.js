@@ -63,18 +63,27 @@ function create_slide() {
         container.innerHTML = "";
         let title_element = document.createElement("h1");
         let description_element = document.createElement("p");
+        let duration_element = document.createElement("h2");
         container.classList.add("container");
         container.style.backgroundColor = config_object.colors[color_index].body;
         title_element.classList.add("event_title");
         title_element.style.color = config_object.colors[color_index].text;
+        title_element.style.fontFamily = config_object.font;
         description_element.classList.add("event_description");
         description_element.style.color = config_object.colors[color_index].text;
+        description_element.style.fontFamily = config_object.font;
+        duration_element.classList.add("length");
+        duration_element.style.color = config_object.colors[color_index].text;
+        duration_element.style.fontFamily = config_object.font;
         let title_text = document.createTextNode(event_array[current_index].title);
         let description_text = document.createTextNode(event_array[current_index].description);
+        let duration_text = document.createTextNode(`${event_array[current_index].length} minutes`);
         title_element.appendChild(title_text);
         description_element.appendChild(description_text);
+        duration_element.appendChild(duration_text);
         container.appendChild(title_element);
         container.appendChild(description_element);
+        container.appendChild(duration_element);
         progress_bar();
         if (current_index < event_array.length) {
             current_index++;
