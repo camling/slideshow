@@ -1,4 +1,5 @@
 @use 'reset';
+@use 'annimations';
 
 .container {
     height: 100vh;
@@ -43,6 +44,8 @@ span.progress_bar_fill {
 
     .event_title{
         grid-area: 1 / 2 / 4 / 4;
+        -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	    animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
     }
 
     .event_description{
@@ -78,6 +81,4 @@ span.progress_bar_fill {
 
 
 
- @keyframes progress-bar {
-    0% { width: 0; }
- }
+ 
