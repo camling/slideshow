@@ -6,6 +6,7 @@ let event_array:any = [];
 let layout_array:any = ["left","right","middle","top","bottom"];
 let current_index:number = 0;
 let container = document.getElementById("container") as HTMLElement | null;
+let reset = false;
 
 function get_current_events()
     {
@@ -166,6 +167,8 @@ return Math.floor(Math.random()* config_object.colors.length);
 function create_slide()
 {
 
+  if(reset === true) location.reload();
+
   let color_index = random_color_index();
   let layout_class = layout_array[get_random_array_index(layout_array)];
   if(container != null)
@@ -275,7 +278,7 @@ function create_slide()
     else
     {
       current_index = 0;
-      location.reload();
+      reset = true;
     }
 
     setTimeout(create_slide,config_object.rotation_speed * 1000);
