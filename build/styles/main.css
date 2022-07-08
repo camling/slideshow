@@ -168,6 +168,9 @@ span.progress_bar_fill {
 .top {
   text-align: justify;
 }
+.top .event_title {
+  text-align: center;
+}
 
 .bottom {
   text-align: justify;
