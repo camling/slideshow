@@ -1,5 +1,5 @@
 # Public Library Events Slideshow
-A TypeScript based slideshow of events based off the Evanced Signups calender
+A TypeScript based slideshow of events using the the Evanced Signups calender API
 
 ## Installation / Usage
 
