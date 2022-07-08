@@ -153,6 +153,7 @@ function create_slide() {
         setTimeout(create_slide, config_object.rotation_speed * 1000);
     }
 }
+// Get config information
 fetch("./main.json")
     .then(response => {
     return response.json();
@@ -161,6 +162,15 @@ fetch("./main.json")
     console.log(data);
     config_object = data;
     console.log(config_object.library_id);
+    if (config_object.alert !== "") {
+        let alert_element = document.createElement("h1");
+        let alert_text = document.createTextNode(config_object.alert);
+        alert_element.classList.add("alert");
+        alert_element.appendChild(alert_text);
+        if (container != null) {
+            container.before(alert_element);
+        }
+    }
     get_current_events().then(events => {
         events.forEach(event => {
             let date = new Date(event.EventStart);
