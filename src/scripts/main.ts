@@ -1,7 +1,7 @@
 interface colors_array { body: string, text: string }[];
 interface colors_array extends Array<colors_array>{};
 
-let config_object:{ library_id: string, name: string, rotation_speed: number, font: string , colors:colors_array, show_qr_code: boolean};
+let config_object:{ library_id: string, name: string, rotation_speed: number, font: string , colors:colors_array, show_qr_code: boolean, alert: string};
 let event_array:any = [];
 let layout_array:any = ["left","right","middle","top","bottom"];
 let current_index:number = 0;
@@ -124,7 +124,8 @@ function create_slide()
     
     container.innerHTML = "";
     container.className = "";
-    
+
+   
     let title_element:HTMLHeadingElement = document.createElement("h1");
     let description_element:HTMLElement = document.createElement("p");
     let duration_element:HTMLHeadingElement = document.createElement("h2");
@@ -217,7 +218,7 @@ function create_slide()
 
 }
 
-
+// Get config information
 fetch("./main.json")
 .then(response => {
    return response.json();
@@ -226,6 +227,22 @@ fetch("./main.json")
     console.log(data);
     config_object = data;
     console.log(config_object.library_id);
+
+    if(config_object.alert !== "")
+    {
+      
+      let alert_element:HTMLHeadingElement = document.createElement("h1");
+      let alert_text:Text = document.createTextNode(config_object.alert);
+      
+      alert_element.classList.add("alert");
+      alert_element.appendChild(alert_text);
+      if(container != null)
+      {
+        container.before(alert_element);
+      }
+      
+   
+    }
 
     get_current_events().then(events => {
       
