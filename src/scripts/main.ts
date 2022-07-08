@@ -30,8 +30,36 @@ function remove_tags(str:string) {
   if ((str===null) || (str===''))
   return "";
   else
-  str = str.toString();
-  return str.replace( /(<([^>]+)>)/ig, '');
+  {
+    str = str.replace(/\&nbsp;/g, '');
+    str = str.replace( /(<([^>]+)>)/ig, '');
+    return str;
+  }
+  
+}
+
+function add_minutes(date:Date, time:number )
+{
+	let hours = 0;
+  let minutes = 0;
+	
+  if(time > 59)
+  {
+    hours = Math.floor(time / 60);
+    minutes = time - (hours * 60);
+    date.setMinutes(date.getMinutes() + minutes);
+    date.setHours(date.getHours() + hours);
+    return date;
+  }
+  else
+  {
+    minutes = time;
+    date.setMinutes(date.getMinutes() + minutes);
+    console.log(`Hours: ${hours}`);
+    console.log(`Minutes: ${minutes}`);
+    return date;
+  }
+  
 }
 
 function format_am_pm(date:Date) {
@@ -60,13 +88,13 @@ function create_link(id:number)
   return `https://${config_object.library_id}.evanced.info/signup/EventDetails?EventId=${id}`;
 }
 
-function choose_layout_index()
+function get_random_array_index(array):number
 {
-  return Math.floor(Math.random()* layout_array.length);
+  return Math.floor(Math.random()* array.length);
 }
 
 
-function progress_bar(color_index)
+function progress_bar(color_index:number)
 {
   let progress_bar:HTMLElement = document.createElement("div");
   let progress_bar_fill:HTMLElement = document.createElement("span");
@@ -85,7 +113,7 @@ function progress_bar(color_index)
  
 }
 
-function get_heading_size(length)
+function get_heading_size(length:number):string
 {
   console.log(length);
 
@@ -106,7 +134,7 @@ function get_heading_size(length)
   return size;
 }
 
-function get_description_size(length)
+function get_description_size(length:number):string
 {
   console.log(length);
 
@@ -139,7 +167,7 @@ function create_slide()
 {
 
   let color_index = random_color_index();
-  let layout_class = layout_array[choose_layout_index()];
+  let layout_class = layout_array[get_random_array_index(layout_array)];
   if(container != null)
   {
     
@@ -150,6 +178,8 @@ function create_slide()
     let title_element:HTMLHeadingElement = document.createElement("h1");
     let description_element:HTMLElement = document.createElement("p");
     let duration_element:HTMLHeadingElement = document.createElement("h2");
+    let start_time_element:HTMLHeadingElement = document.createElement("h2");
+    let end_time_element:HTMLHeadElement = document.createElement("h2");
     let date_element:HTMLHeadElement = document.createElement("h2");
 
     container.classList.add("container");
@@ -161,7 +191,7 @@ function create_slide()
     title_element.style.color = config_object.colors[color_index].text;
     title_element.style.fontFamily = config_object.font;
     title_element.style.fontSize = get_heading_size(event_array[current_index].title.length);
-    console.log(get_heading_size(event_array[current_index].title.length));
+    //console.log(get_heading_size(event_array[current_index].title.length));
    
     description_element.classList.add("event_description");
     description_element.style.color = config_object.colors[color_index].text;
@@ -172,24 +202,37 @@ function create_slide()
     duration_element.style.color = config_object.colors[color_index].text;
     duration_element.style.fontFamily = config_object.font;
 
+    start_time_element.classList.add("time");
+    start_time_element.style.color = config_object.colors[color_index].text;
+    start_time_element.style.fontFamily = config_object.font;
+
+    end_time_element.classList.add("end_time");
+    end_time_element.style.color = config_object.colors[color_index].text;
+    end_time_element.style.fontFamily = config_object.font;
+
     date_element.classList.add("date");
     date_element.style.color = config_object.colors[color_index].text;
     date_element.style.fontFamily = config_object.font;
 
-
     let title_text:Text = document.createTextNode(event_array[current_index].title);
     let description_text:Text = document.createTextNode(event_array[current_index].description);
     let duration_text:Text = document.createTextNode(`${event_array[current_index].length} minutes`);
+    let start_time_text:Text = document.createTextNode(event_array[current_index].time);
+    let end_time_text:Text = document.createTextNode(format_am_pm(add_minutes(event_array[current_index].date_object, event_array[current_index].length)));
     let date_text:Text = document.createTextNode(event_array[current_index].date);
 
     title_element.appendChild(title_text);
     description_element.appendChild(description_text);
     duration_element.appendChild(duration_text);
+    start_time_element.appendChild(start_time_text);
+    end_time_element.appendChild(end_time_text);
     date_element.appendChild(date_text);
 
     container.appendChild(title_element);
     container.appendChild(description_element);
     container.appendChild(duration_element);
+    container.appendChild(start_time_element);
+    container.appendChild(end_time_element);
     container.appendChild(date_element);
     
     if(config_object.show_qr_code === true)
@@ -273,8 +316,8 @@ fetch("./main.json")
         events.forEach(event => {
           let date:Date = new Date(event.EventStart);
           let display_date:string = format_date(date);
-          let display_time:string = format_am_pm(date);
-          event_array.push({"id":event.EventId, "title":event.Title, "description":remove_tags(event.Description),"date":display_date, "time":display_time, "image":event.Image, "image_alt":event.ImageAlt, "room":event.SpaceName, "link":create_link(event.EventId), "length":event.EventLength});
+          let display_start_time:string = format_am_pm(date);
+          event_array.push({"id":event.EventId, "title":event.Title, "description":remove_tags(event.Description), "date_object": date, "date":display_date, "time":display_start_time, "image":event.Image, "image_alt":event.ImageAlt, "room":event.SpaceName, "link":create_link(event.EventId), "length":event.EventLength});
         });
       console.log(event_array);
       create_slide();
