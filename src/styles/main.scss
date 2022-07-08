@@ -22,6 +22,17 @@ span.progress_bar_fill {
     display: inline-block;
 }
 
+.alert {
+    font-size: 4rem;
+    color: white;
+    background-color: red;
+    display: block;
+    padding: 15px;
+    width: 100%;
+    top: 20px;
+    text-align: center;
+}
+
 
 .left{
     display: grid;
