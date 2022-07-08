@@ -5,8 +5,9 @@ let config_object;
 let event_array = [];
 let layout_array = ["left", "right", "middle", "top", "bottom"];
 let current_index = 0;
-let container = document.getElementById("container");
+const container = document.getElementById("container");
 let reset = false;
+const r = document.querySelector(':root');
 function get_current_events() {
     async function fetch_all_calendar_events() {
         const response = await fetch(`https://${config_object.library_id}.evanced.info/api/signup/eventlist?isOngoingVisible=true&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=false`);
@@ -126,6 +127,8 @@ function create_slide() {
     let color_index = random_color_index();
     let layout_class = layout_array[get_random_array_index(layout_array)];
     if (container != null) {
+        r.style.setProperty('--main', config_object.colors[color_index].body);
+        r.style.setProperty('--secondary', config_object.colors[color_index].text);
         container.innerHTML = "";
         container.className = "";
         let title_element = document.createElement("h1");

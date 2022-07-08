@@ -1,10 +1,16 @@
 @use 'reset';
 @use 'annimations';
 
+:root {
+    --main: #1e90ff;
+    --secondary: #ffffff; 
+  }
+
 .container {
     width: 100vw;
     font-family: Arial, Helvetica, sans-serif;
     padding: 20px;
+    animation: color-change-2x 1s linear alternate both;
 }
 
 

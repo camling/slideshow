@@ -5,8 +5,9 @@ let config_object:{ library_id: string, name: string, rotation_speed: number, fo
 let event_array:any = [];
 let layout_array:any = ["left","right","middle","top","bottom"];
 let current_index:number = 0;
-let container = document.getElementById("container") as HTMLElement | null;
+const container = document.getElementById("container") as HTMLElement | null;
 let reset = false;
+const r:any = document.querySelector(':root');
 
 function get_current_events()
     {
@@ -174,6 +175,8 @@ function create_slide()
   if(container != null)
   {
     
+    r.style.setProperty('--main', config_object.colors[color_index].body);
+    r.style.setProperty('--secondary', config_object.colors[color_index].text);
     container.innerHTML = "";
     container.className = "";
 
@@ -296,6 +299,8 @@ fetch("./main.json")
 .then(data => {
     console.log(data);
     config_object = data;
+    
+    
     console.log(config_object.library_id);
 
     if(config_object.alert !== "")

@@ -101,10 +101,24 @@ select {
     width: 0;
   }
 }
+@keyframes color-change-2x {
+  0% {
+    background: var(--secondary);
+  }
+  100% {
+    background: var(--main);
+  }
+}
+:root {
+  --main: #1e90ff;
+  --secondary: #ffffff;
+}
+
 .container {
   width: 100vw;
   font-family: Arial, Helvetica, sans-serif;
   padding: 20px;
+  animation: color-change-2x 1s linear alternate both;
 }
 
 .progress_bar {
