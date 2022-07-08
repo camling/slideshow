@@ -91,17 +91,38 @@ function get_heading_size(length)
 
   let size:string;
   switch(true) {
-    case (length < 20):
+    case (length < 30):
      size = "5em";
       break;
-    case (length < 30):
+    case (length < 50):
       size = "4em";
       break;
-    case (length < 50):
+    case (length < 75):
       size = "3em";
         break;  
     default:
       size = "2.5em";
+  }
+  return size;
+}
+
+function get_description_size(length)
+{
+  console.log(length);
+
+  let size:string;
+  switch(true) {
+    case (length < 50):
+     size = "3em";
+      break;
+    case (length < 100):
+      size = "2.5em";
+      break;
+    case (length < 250):
+      size = "2em";
+        break;  
+    default:
+      size = "1.5em";
   }
   return size;
 }
@@ -125,7 +146,7 @@ function create_slide()
     container.innerHTML = "";
     container.className = "";
 
-   
+    
     let title_element:HTMLHeadingElement = document.createElement("h1");
     let description_element:HTMLElement = document.createElement("p");
     let duration_element:HTMLHeadingElement = document.createElement("h2");
@@ -134,6 +155,7 @@ function create_slide()
     container.classList.add("container");
     container.classList.add(layout_class);
     container.style.backgroundColor = config_object.colors[color_index].body;
+    container.style.height = config_object.alert === "" ? "100vh" : "85vh";
     
     title_element.classList.add("event_title");
     title_element.style.color = config_object.colors[color_index].text;
@@ -144,6 +166,7 @@ function create_slide()
     description_element.classList.add("event_description");
     description_element.style.color = config_object.colors[color_index].text;
     description_element.style.fontFamily = config_object.font;
+    description_element.style.fontSize = get_description_size(event_array[current_index].description.length)
 
     duration_element.classList.add("length");
     duration_element.style.color = config_object.colors[color_index].text;
@@ -209,6 +232,7 @@ function create_slide()
     else
     {
       current_index = 0;
+      location.reload();
     }
 
     setTimeout(create_slide,config_object.rotation_speed * 1000);
