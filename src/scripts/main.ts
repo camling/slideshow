@@ -221,14 +221,14 @@ function create_slide()
     date_element.style.fontFamily = config_object.font;
 
     let title_text:Text = document.createTextNode(event_array[current_index].title);
-    let description_text:Text = document.createTextNode(event_array[current_index].description);
+    let description_text = event_array[current_index].description;
     let duration_text:Text = document.createTextNode(`${event_array[current_index].length} minutes`);
     let start_time_text:Text = document.createTextNode(event_array[current_index].time);
     let end_time_text:Text = document.createTextNode(format_am_pm(add_minutes(event_array[current_index].date_object, event_array[current_index].length)));
     let date_text:Text = document.createTextNode(event_array[current_index].date);
 
     title_element.appendChild(title_text);
-    description_element.appendChild(description_text);
+    description_element.innerHTML = description_text;
     duration_element.appendChild(duration_text);
     start_time_element.appendChild(start_time_text);
     end_time_element.appendChild(end_time_text);
@@ -325,7 +325,7 @@ fetch("./main.json")
           let date:Date = new Date(event.EventStart);
           let display_date:string = format_date(date);
           let display_start_time:string = format_am_pm(date);
-          event_array.push({"id":event.EventId, "title":event.Title, "description":remove_tags(event.Description), "date_object": date, "date":display_date, "time":display_start_time, "image":event.Image, "image_alt":event.ImageAlt, "room":event.SpaceName, "link":create_link(event.EventId), "length":event.EventLength});
+          event_array.push({"id":event.EventId, "title":event.Title, "description":event.Description, "date_object": date, "date":display_date, "time":display_start_time, "image":event.Image, "image_alt":event.ImageAlt, "room":event.SpaceName, "link":create_link(event.EventId), "length":event.EventLength});
         });
       console.log(event_array);
       create_slide();
