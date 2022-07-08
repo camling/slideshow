@@ -94,6 +94,7 @@ function create_slide() {
         container.classList.add("container");
         container.classList.add(layout_class);
         container.style.backgroundColor = config_object.colors[color_index].body;
+        container.style.height = config_object.alert === "" ? "100vh" : "85vh";
         title_element.classList.add("event_title");
         title_element.style.color = config_object.colors[color_index].text;
         title_element.style.fontFamily = config_object.font;
@@ -149,6 +150,7 @@ function create_slide() {
         }
         else {
             current_index = 0;
+            location.reload();
         }
         setTimeout(create_slide, config_object.rotation_speed * 1000);
     }
