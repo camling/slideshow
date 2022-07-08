@@ -72,8 +72,36 @@ select {
     scroll-behavior: auto !important;
   }
 }
+@-webkit-keyframes text-focus-in {
+  0% {
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+@keyframes text-focus-in {
+  0% {
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+@keyframes progress-bar {
+  0% {
+    width: 0;
+  }
+}
 .container {
-  height: 100vh;
   width: 100vw;
   font-family: Arial, Helvetica, sans-serif;
   padding: 20px;
@@ -100,7 +128,7 @@ span.progress_bar_fill {
   display: block;
   padding: 15px;
   width: 100%;
-  top: 20px;
+  height: 15vh;
   text-align: center;
 }
 
@@ -113,6 +141,8 @@ span.progress_bar_fill {
 }
 .left .event_title {
   grid-area: 1/2/4/4;
+  -webkit-animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 .left .event_description {
   grid-area: 1/5/4/8;
@@ -138,13 +168,10 @@ span.progress_bar_fill {
 .top {
   text-align: justify;
 }
+.top .event_title {
+  text-align: center;
+}
 
 .bottom {
   text-align: justify;
-}
-
-@keyframes progress-bar {
-  0% {
-    width: 0;
-  }
 }

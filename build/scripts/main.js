@@ -41,6 +41,7 @@ var event_array = [];
 var layout_array = ["left", "right", "middle", "top", "bottom"];
 var current_index = 0;
 var container = document.getElementById("container");
+var reset = false;
 function get_current_events() {
     function fetch_all_calendar_events() {
         return __awaiter(this, void 0, void 0, function () {
@@ -68,9 +69,29 @@ function get_current_events() {
 function remove_tags(str) {
     if ((str === null) || (str === ''))
         return "";
-    else
-        str = str.toString();
-    return str.replace(/(<([^>]+)>)/ig, '');
+    else {
+        str = str.replace(/\&nbsp;/g, '');
+        str = str.replace(/(<([^>]+)>)/ig, '');
+        return str;
+    }
+}
+function add_minutes(date, time) {
+    var hours = 0;
+    var minutes = 0;
+    if (time > 59) {
+        hours = Math.floor(time / 60);
+        minutes = time - (hours * 60);
+        date.setMinutes(date.getMinutes() + minutes);
+        date.setHours(date.getHours() + hours);
+        return date;
+    }
+    else {
+        minutes = time;
+        date.setMinutes(date.getMinutes() + minutes);
+        console.log("Hours: ".concat(hours));
+        console.log("Minutes: ".concat(minutes));
+        return date;
+    }
 }
 function format_am_pm(date) {
     var hours = date.getHours();
@@ -91,8 +112,8 @@ function format_date(date) {
 function create_link(id) {
     return "https://".concat(config_object.library_id, ".evanced.info/signup/EventDetails?EventId=").concat(id);
 }
-function choose_layout_index() {
-    return Math.floor(Math.random() * layout_array.length);
+function get_random_array_index(array) {
+    return Math.floor(Math.random() * array.length);
 }
 function progress_bar(color_index) {
     var progress_bar = document.createElement("div");
@@ -110,13 +131,13 @@ function get_heading_size(length) {
     console.log(length);
     var size;
     switch (true) {
-        case (length < 20):
+        case (length < 30):
             size = "5em";
             break;
-        case (length < 30):
+        case (length < 50):
             size = "4em";
             break;
-        case (length < 50):
+        case (length < 75):
             size = "3em";
             break;
         default:
@@ -124,47 +145,83 @@ function get_heading_size(length) {
     }
     return size;
 }
+function get_description_size(length) {
+    console.log(length);
+    var size;
+    switch (true) {
+        case (length < 50):
+            size = "3em";
+            break;
+        case (length < 100):
+            size = "2.5em";
+            break;
+        case (length < 250):
+            size = "2em";
+            break;
+        default:
+            size = "1.5em";
+    }
+    return size;
+}
 function random_color_index() {
     return Math.floor(Math.random() * config_object.colors.length);
 }
 function create_slide() {
+    if (reset === true)
+        location.reload();
     var color_index = random_color_index();
-    var layout_class = layout_array[choose_layout_index()];
+    var layout_class = layout_array[get_random_array_index(layout_array)];
     if (container != null) {
         container.innerHTML = "";
         container.className = "";
         var title_element = document.createElement("h1");
         var description_element = document.createElement("p");
         var duration_element = document.createElement("h2");
+        var start_time_element = document.createElement("h2");
+        var end_time_element = document.createElement("h2");
         var date_element = document.createElement("h2");
         container.classList.add("container");
         container.classList.add(layout_class);
         container.style.backgroundColor = config_object.colors[color_index].body;
+        container.style.height = config_object.alert === "" ? "100vh" : "85vh";
         title_element.classList.add("event_title");
         title_element.style.color = config_object.colors[color_index].text;
         title_element.style.fontFamily = config_object.font;
         title_element.style.fontSize = get_heading_size(event_array[current_index].title.length);
-        console.log(get_heading_size(event_array[current_index].title.length));
+        //console.log(get_heading_size(event_array[current_index].title.length));
         description_element.classList.add("event_description");
         description_element.style.color = config_object.colors[color_index].text;
         description_element.style.fontFamily = config_object.font;
+        description_element.style.fontSize = get_description_size(event_array[current_index].description.length);
         duration_element.classList.add("length");
         duration_element.style.color = config_object.colors[color_index].text;
         duration_element.style.fontFamily = config_object.font;
+        start_time_element.classList.add("time");
+        start_time_element.style.color = config_object.colors[color_index].text;
+        start_time_element.style.fontFamily = config_object.font;
+        end_time_element.classList.add("end_time");
+        end_time_element.style.color = config_object.colors[color_index].text;
+        end_time_element.style.fontFamily = config_object.font;
         date_element.classList.add("date");
         date_element.style.color = config_object.colors[color_index].text;
         date_element.style.fontFamily = config_object.font;
         var title_text = document.createTextNode(event_array[current_index].title);
         var description_text = document.createTextNode(event_array[current_index].description);
         var duration_text = document.createTextNode("".concat(event_array[current_index].length, " minutes"));
+        var start_time_text = document.createTextNode(event_array[current_index].time);
+        var end_time_text = document.createTextNode(format_am_pm(add_minutes(event_array[current_index].date_object, event_array[current_index].length)));
         var date_text = document.createTextNode(event_array[current_index].date);
         title_element.appendChild(title_text);
         description_element.appendChild(description_text);
         duration_element.appendChild(duration_text);
+        start_time_element.appendChild(start_time_text);
+        end_time_element.appendChild(end_time_text);
         date_element.appendChild(date_text);
         container.appendChild(title_element);
         container.appendChild(description_element);
         container.appendChild(duration_element);
+        container.appendChild(start_time_element);
+        container.appendChild(end_time_element);
         container.appendChild(date_element);
         if (config_object.show_qr_code === true) {
             var qr_element = document.createElement("div");
@@ -195,6 +252,7 @@ function create_slide() {
         }
         else {
             current_index = 0;
+            reset = true;
         }
         setTimeout(create_slide, config_object.rotation_speed * 1000);
     }
@@ -221,8 +279,8 @@ fetch("./main.json")
         events.forEach(function (event) {
             var date = new Date(event.EventStart);
             var display_date = format_date(date);
-            var display_time = format_am_pm(date);
-            event_array.push({ "id": event.EventId, "title": event.Title, "description": remove_tags(event.Description), "date": display_date, "time": display_time, "image": event.Image, "image_alt": event.ImageAlt, "room": event.SpaceName, "link": create_link(event.EventId), "length": event.EventLength });
+            var display_start_time = format_am_pm(date);
+            event_array.push({ "id": event.EventId, "title": event.Title, "description": remove_tags(event.Description), "date_object": date, "date": display_date, "time": display_start_time, "image": event.Image, "image_alt": event.ImageAlt, "room": event.SpaceName, "link": create_link(event.EventId), "length": event.EventLength });
         });
         console.log(event_array);
         create_slide();
