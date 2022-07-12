@@ -19,5 +19,6 @@
         {"body": "#143476", "text": "white"},
         {"body": "#328ee3", "text": "white"},
         {"body": "#b4e2f0", "text": "black"}
-        ]
+        ],
+    "event_type_ids" : [42,81,27]
 }
