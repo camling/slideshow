@@ -20,5 +20,6 @@
         {"body": "#328ee3", "text": "white"},
         {"body": "#b4e2f0", "text": "black"}
         ],
-    "event_type_ids" : [42,81,27]
+    "event_type_ids" : [42,81,27],
+    "start_date" : "2022-07-14"
 }
