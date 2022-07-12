@@ -146,6 +146,11 @@ span.progress_bar_fill {
   text-align: center;
 }
 
+.qr_code img {
+  border: solid white 15px;
+  border-radius: 5px;
+}
+
 .left {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
