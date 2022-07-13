@@ -13,8 +13,8 @@ function url_join(id) {
 }
 function get_current_events() {
     async function fetch_all_calendar_events() {
-        console.log(`https://${config_object.library_id}.evanced.info/api/signup/eventlist?${config_object.start_date ? 'startDate=' + config_object.start_date + '&' : ''}${config_object.event_type_ids ? config_object.event_type_ids.map(url_join).join('') : ''}isOngoingVisible=true&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=false`);
-        const response = await fetch(`https://${config_object.library_id}.evanced.info/api/signup/eventlist?${config_object.start_date ? 'startDate=' + config_object.start_date + '&' : ''}${config_object.event_type_ids ? config_object.event_type_ids.map(url_join).join('') : ''}isOngoingVisible=true&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=false`);
+        console.log(`https://${config_object.library_id}.evanced.info/api/signup/eventlist?${config_object.start_date ? 'startDate=' + config_object.start_date + '&' : ''}${config_object.end_date ? 'endDate=' + config_object.end_date + '&' : ''}${config_object.event_type_ids ? config_object.event_type_ids.map(url_join).join('') : ''}isOngoingVisible=true&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=false`);
+        const response = await fetch(`https://${config_object.library_id}.evanced.info/api/signup/eventlist?${config_object.start_date ? 'startDate=' + config_object.start_date + '&' : ''}${config_object.end_date ? 'endDate=' + config_object.end_date + '&' : ''}${config_object.event_type_ids ? config_object.event_type_ids.map(url_join).join('') : ''}isOngoingVisible=true&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=false`);
         if (!response.ok) {
             const message = `An error has occurred: ${response.status}`;
             throw new Error(message);
