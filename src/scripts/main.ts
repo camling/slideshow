@@ -1,7 +1,9 @@
 interface colors_array { body: string, text: string }[];
 interface colors_array extends Array<colors_array>{};
 
-let config_object:{ library_id: string, name: string, rotation_speed: number, font: string , colors:colors_array, show_qr_code: boolean, alert: string, event_type_ids:[], start_date:string, end_date:string};
+let config_object:{ library_id: string, name: string, rotation_speed: number, font: string, 
+  colors:colors_array, show_qr_code: boolean, alert: string, event_type_ids:[], start_date:string, end_date:string, 
+  locations:[], age_groups:[],is_ongoing:boolean, only_featured_events:boolean};
 let event_array:any = [];
 let layout_array:any = ["left","right","middle","top","bottom"];
 let current_index:number = 0;
@@ -10,17 +12,34 @@ let reset = false;
 const r:any = document.querySelector(':root');
 
 
-function url_join(id:number)
+function url_join_event_types(id:number)
 {
   return 'eventsTypes='+id+'&';
+}
+
+function url_join_locations(id:number)
+{
+  return 'locations='+id+'&';
+}
+
+function url_join_age_groups(id:number)
+{
+  return 'ageGroups='+id+'&';
 }
 
 function get_current_events()
     {
       async function fetch_all_calendar_events() 
         {
-            console.log(`https://${config_object.library_id}.evanced.info/api/signup/eventlist?${config_object.start_date ? 'startDate='+config_object.start_date+'&' : ''}${config_object.end_date ? 'endDate='+config_object.end_date+'&' : ''}${config_object.event_type_ids ? config_object.event_type_ids.map(url_join).join('') : ''}isOngoingVisible=true&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=false`);
-            const response = await fetch(`https://${config_object.library_id}.evanced.info/api/signup/eventlist?${config_object.start_date ? 'startDate='+config_object.start_date+'&' : ''}${config_object.end_date ? 'endDate='+config_object.end_date+'&' : ''}${config_object.event_type_ids ? config_object.event_type_ids.map(url_join).join('') : ''}isOngoingVisible=true&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=false`);
+            let url = `https://${config_object.library_id}.evanced.info/api/signup/eventlist?
+            ${config_object.start_date ? 'startDate='+config_object.start_date+'&' : ''}
+            ${config_object.end_date ? 'endDate='+config_object.end_date+'&' : ''}
+            ${config_object.event_type_ids ? config_object.event_type_ids.map(url_join_event_types).join('') : ''}
+            ${config_object.locations ? config_object.locations.map(url_join_locations).join('') : ''}
+            ${config_object.age_groups ? config_object.age_groups.map(url_join_age_groups).join('') : ''}
+            isOngoingVisible=${config_object.is_ongoing}&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=${config_object.only_featured_events}`;
+            console.log(url);
+            const response = await fetch(url);
             if (!response.ok) {
               const message = `An error has occurred: ${response.status}`;
               throw new Error(message);

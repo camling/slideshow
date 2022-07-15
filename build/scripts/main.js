@@ -8,13 +8,26 @@ let current_index = 0;
 const container = document.getElementById("container");
 let reset = false;
 const r = document.querySelector(':root');
-function url_join(id) {
+function url_join_event_types(id) {
     return 'eventsTypes=' + id + '&';
+}
+function url_join_locations(id) {
+    return 'locations=' + id + '&';
+}
+function url_join_age_groups(id) {
+    return 'ageGroups=' + id + '&';
 }
 function get_current_events() {
     async function fetch_all_calendar_events() {
-        console.log(`https://${config_object.library_id}.evanced.info/api/signup/eventlist?${config_object.start_date ? 'startDate=' + config_object.start_date + '&' : ''}${config_object.end_date ? 'endDate=' + config_object.end_date + '&' : ''}${config_object.event_type_ids ? config_object.event_type_ids.map(url_join).join('') : ''}isOngoingVisible=true&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=false`);
-        const response = await fetch(`https://${config_object.library_id}.evanced.info/api/signup/eventlist?${config_object.start_date ? 'startDate=' + config_object.start_date + '&' : ''}${config_object.end_date ? 'endDate=' + config_object.end_date + '&' : ''}${config_object.event_type_ids ? config_object.event_type_ids.map(url_join).join('') : ''}isOngoingVisible=true&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=false`);
+        let url = `https://${config_object.library_id}.evanced.info/api/signup/eventlist?
+            ${config_object.start_date ? 'startDate=' + config_object.start_date + '&' : ''}
+            ${config_object.end_date ? 'endDate=' + config_object.end_date + '&' : ''}
+            ${config_object.event_type_ids ? config_object.event_type_ids.map(url_join_event_types).join('') : ''}
+            ${config_object.locations ? config_object.locations.map(url_join_locations).join('') : ''}
+            ${config_object.age_groups ? config_object.age_groups.map(url_join_age_groups).join('') : ''}
+            isOngoingVisible=${config_object.is_ongoing}&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=${config_object.only_featured_events}`;
+        console.log(url);
+        const response = await fetch(url);
         if (!response.ok) {
             const message = `An error has occurred: ${response.status}`;
             throw new Error(message);
