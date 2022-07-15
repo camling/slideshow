@@ -220,6 +220,19 @@ function create_slide() {
             image_element.classList.add("event_image");
             container.appendChild(image_element);
         }
+        if (config_object.logo !== "") {
+            try {
+                let url = new URL(config_object.logo);
+            }
+            catch (_) {
+                console.error(`${config_object.logo} is a malformed logo url. Please update it in the main.json file.`);
+                return false;
+            }
+            let logo_element = document.createElement("img");
+            logo_element.src = config_object.logo;
+            logo_element.classList.add("logo_image");
+            container.appendChild(logo_element);
+        }
         progress_bar(color_index);
         if (current_index < event_array.length - 1) {
             current_index++;
