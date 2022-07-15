@@ -20,7 +20,13 @@
         {"body": "#328ee3", "text": "white"},
         {"body": "#b4e2f0", "text": "black"}
         ],
-    "event_type_ids" : [42,81,27],
+    "event_type_ids" : [],
     "start_date" : "2022-07-22",
-    "end_date" : "2022-07-28"
+    "end_date" : "2022-07-28",
+    "locations" : [],
+    "age_groups" : [],
+    "is_ongoing" : true,
+    "only_featured_events" : false
+
+
 }
