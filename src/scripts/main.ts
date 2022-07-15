@@ -1,7 +1,7 @@
 interface colors_array { body: string, text: string }[];
 interface colors_array extends Array<colors_array>{};
 
-let config_object:{ library_id: string, name: string, rotation_speed: number, font: string, 
+let config_object:{ library_id: string, name: string, rotation_speed: number, logo: string, font: string, 
   colors:colors_array, show_qr_code: boolean, alert: string, event_type_ids:[], start_date:string, end_date:string, 
   locations:[], age_groups:[],is_ongoing:boolean, only_featured_events:boolean};
 let event_array:any = [];
@@ -212,6 +212,7 @@ function create_slide()
     let start_time_element:HTMLHeadingElement = document.createElement("h2");
     let end_time_element:HTMLHeadElement = document.createElement("h2");
     let date_element:HTMLHeadElement = document.createElement("h2");
+    
 
     container.classList.add("container");
     container.classList.add(layout_class);
@@ -245,6 +246,8 @@ function create_slide()
     date_element.style.color = config_object.colors[color_index].text;
     date_element.style.fontFamily = config_object.font;
 
+    
+
     let title_text:Text = document.createTextNode(event_array[current_index].title);
     let description_text = event_array[current_index].description;
     let duration_text:Text = document.createTextNode(`${event_array[current_index].length} minutes`);
@@ -265,6 +268,8 @@ function create_slide()
     container.appendChild(start_time_element);
     container.appendChild(end_time_element);
     container.appendChild(date_element);
+    
+    
     
     if(config_object.show_qr_code === true)
     {
@@ -294,6 +299,22 @@ function create_slide()
       image_element.classList.add("event_image");
       container.appendChild(image_element);
     }
+
+    if(config_object.logo !== "")
+    {
+      try {
+        let url = new URL(config_object.logo);
+      } catch (_) {
+        console.error(`${config_object.logo} is a malformed logo url. Please update it in the main.json file.`);
+        return false;  
+      }
+
+      let logo_element:HTMLImageElement = document.createElement("img");
+        logo_element.src = config_object.logo;
+        logo_element.classList.add("logo_image");
+        container.appendChild(logo_element);
+     
+      }
     
 
 
