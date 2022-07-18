@@ -44,6 +44,13 @@ span.progress_bar_fill {
     border-radius: 5px;
 }
 
+.event_description br {
+    display: none;
+}
+
+.event_description div {
+    margin-top:10px;
+}
 
 .left{
     display: grid;
