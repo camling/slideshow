@@ -8,6 +8,7 @@ let event_array:any = [];
 let layout_array:any = ["left","right","middle","top","bottom"];
 let current_index:number = 0;
 const container = document.getElementById("container") as HTMLElement | null;
+const video_container = document.querySelector('video') as HTMLVideoElement | null;
 let reset = false;
 const r:any = document.querySelector(':root');
 
@@ -184,15 +185,27 @@ function get_description_size(length:number):string
 
 function random_color_index()
 {
-
 return Math.floor(Math.random()* config_object.colors.length);
-
-
 }
+
+function hexToRgbA(hex:string, alpha:number){
+  var c;
+  if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+      c= hex.substring(1).split('');
+      if(c.length== 3){
+          c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+      }
+      c= '0x'+c.join('');
+      return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+','+alpha+')';
+  }
+  throw new Error('Bad Hex');
+}
+
+
+
 
 function create_slide()
 {
-
   if(reset === true) location.reload();
 
   let color_index = random_color_index();
@@ -200,7 +213,7 @@ function create_slide()
   if(container != null)
   {
     
-    r.style.setProperty('--main', config_object.colors[color_index].body);
+    r.style.setProperty('--main', hexToRgbA(config_object.colors[color_index].body, 0.5));
     r.style.setProperty('--secondary', config_object.colors[color_index].text);
     container.innerHTML = "";
     container.className = "";
@@ -216,7 +229,7 @@ function create_slide()
 
     container.classList.add("container");
     container.classList.add(layout_class);
-    container.style.backgroundColor = config_object.colors[color_index].body;
+    container.style.backgroundColor = hexToRgbA(config_object.colors[color_index].body, 0.5);
     container.style.height = config_object.alert === "" ? "100vh" : "85vh";
     
     title_element.classList.add("event_title");
@@ -346,6 +359,13 @@ fetch("./main.json")
     console.log(data);
     config_object = data;
     
+      if(video_container != null)
+      {
+      video_container.defaultPlaybackRate = 0.2;
+      video_container.play();
+      }
+    
+    
     
     console.log(config_object.library_id);
 
@@ -362,7 +382,6 @@ fetch("./main.json")
         container.before(alert_element);
       }
       
-   
     }
 
     get_current_events().then(events => {
