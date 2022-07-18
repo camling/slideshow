@@ -149,7 +149,7 @@ function create_slide() {
         container.innerHTML = "";
         container.className = "";
         let title_element = document.createElement("h1");
-        let description_element = document.createElement("p");
+        let description_element = document.createElement("div");
         let duration_element = document.createElement("h2");
         let start_time_element = document.createElement("h2");
         let end_time_element = document.createElement("h2");
