@@ -1,7 +1,7 @@
 {
     "name" : "Mount Prospect Public Library",
     "library_id" : "mppl",
-    "rotation_speed" : 500,
+    "rotation_speed" : 30,
     "font" : "Open Sans, Arial, Helvetica, sans-serif",
     "logo": "https://mppl.org/wp-content/uploads/2022/04/MPPL-Mobile-App-Icon-150x150.png",
     "alert" : "",
