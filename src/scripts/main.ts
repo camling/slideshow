@@ -207,7 +207,7 @@ function create_slide()
 
     
     let title_element:HTMLHeadingElement = document.createElement("h1");
-    let description_element:HTMLElement = document.createElement("p");
+    let description_element:HTMLElement = document.createElement("div");
     let duration_element:HTMLHeadingElement = document.createElement("h2");
     let start_time_element:HTMLHeadingElement = document.createElement("h2");
     let end_time_element:HTMLHeadElement = document.createElement("h2");
