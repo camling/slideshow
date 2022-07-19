@@ -248,19 +248,15 @@ function create_slide()
     description_element.style.fontSize = get_description_size(event_array[current_index].description.length)
 
     duration_element.classList.add("length");
-    duration_element.style.color = config_object.colors[color_index].text;
     duration_element.style.fontFamily = config_object.font;
 
     start_time_element.classList.add("time");
-    start_time_element.style.color = config_object.colors[color_index].text;
     start_time_element.style.fontFamily = config_object.font;
 
     end_time_element.classList.add("end_time");
-    end_time_element.style.color = config_object.colors[color_index].text;
     end_time_element.style.fontFamily = config_object.font;
 
     date_element.classList.add("date");
-    date_element.style.color = config_object.colors[color_index].text;
     date_element.style.fontFamily = config_object.font;
 
     
