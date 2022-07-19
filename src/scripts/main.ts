@@ -5,7 +5,7 @@ let config_object:{ library_id: string, name: string, rotation_speed: number, lo
   colors:colors_array, show_qr_code: boolean, alert: string, event_type_ids:[], start_date:string, end_date:string, 
   locations:[], age_groups:[],is_ongoing:boolean, only_featured_events:boolean};
 let event_array:any = [];
-let layout_array:any = ["left","right","middle","top","bottom"];
+let layout_array:any = ["left", "right", "top", "bottom"];
 let current_index:number = 0;
 const container = document.getElementById("container") as HTMLElement | null;
 const video_container = document.querySelector('video') as HTMLVideoElement | null;
@@ -52,8 +52,7 @@ function get_current_events()
     
         return all_events;
     }
-
-   
+ 
 function remove_tags(str:string) {
   if ((str===null) || (str===''))
   return "";
@@ -148,16 +147,16 @@ function get_heading_size(length:number):string
   let size:string;
   switch(true) {
     case (length < 30):
-     size = "5em";
+     size = "6rem";
       break;
     case (length < 50):
-      size = "4em";
+      size = "5rem";
       break;
     case (length < 75):
-      size = "3em";
+      size = "4rem";
         break;  
     default:
-      size = "2.5em";
+      size = "3rem";
   }
   return size;
 }
@@ -218,10 +217,13 @@ function create_slide()
     container.innerHTML = "";
     container.className = "";
 
+    let sidebar_element:HTMLElement = document.createElement("div");
+    let main_element:HTMLElement = document.createElement("div");
     
     let title_element:HTMLHeadingElement = document.createElement("h1");
     let description_element:HTMLElement = document.createElement("div");
     let duration_element:HTMLHeadingElement = document.createElement("h2");
+    let time_element:HTMLElement = document.createElement("div");
     let start_time_element:HTMLHeadingElement = document.createElement("h2");
     let end_time_element:HTMLHeadElement = document.createElement("h2");
     let date_element:HTMLHeadElement = document.createElement("h2");
@@ -231,6 +233,9 @@ function create_slide()
     container.classList.add(layout_class);
     container.style.backgroundColor = hexToRgbA(config_object.colors[color_index].body, 0.5);
     container.style.height = config_object.alert === "" ? "100vh" : "85vh";
+
+    sidebar_element.classList.add("sidebar");
+    main_element.classList.add("main_slide");
     
     title_element.classList.add("event_title");
     title_element.style.color = config_object.colors[color_index].text;
@@ -244,19 +249,17 @@ function create_slide()
     description_element.style.fontSize = get_description_size(event_array[current_index].description.length)
 
     duration_element.classList.add("length");
-    duration_element.style.color = config_object.colors[color_index].text;
     duration_element.style.fontFamily = config_object.font;
 
-    start_time_element.classList.add("time");
-    start_time_element.style.color = config_object.colors[color_index].text;
+    time_element.classList.add("time");
+
+    start_time_element.classList.add("start_time");
     start_time_element.style.fontFamily = config_object.font;
 
     end_time_element.classList.add("end_time");
-    end_time_element.style.color = config_object.colors[color_index].text;
     end_time_element.style.fontFamily = config_object.font;
 
     date_element.classList.add("date");
-    date_element.style.color = config_object.colors[color_index].text;
     date_element.style.fontFamily = config_object.font;
 
     
@@ -275,21 +278,42 @@ function create_slide()
     end_time_element.appendChild(end_time_text);
     date_element.appendChild(date_text);
 
-    container.appendChild(title_element);
-    container.appendChild(description_element);
-    container.appendChild(duration_element);
-    container.appendChild(start_time_element);
-    container.appendChild(end_time_element);
-    container.appendChild(date_element);
-    
-    
+
+    if(config_object.logo !== "")
+    {
+      try {
+        let url = new URL(config_object.logo);
+      } catch (_) {
+        console.error(`${config_object.logo} is a malformed logo url. Please update it in the main.json file.`);
+        return false;  
+      }
+
+      let logo_element:HTMLImageElement = document.createElement("img");
+        logo_element.src = config_object.logo;
+        logo_element.classList.add("logo_image");
+        sidebar_element.appendChild(logo_element);
+     
+      }
+
+    main_element.appendChild(title_element);
+    main_element.appendChild(description_element);
+    sidebar_element.appendChild(duration_element);
+    sidebar_element.appendChild(time_element);
+    time_element.appendChild(start_time_element);
+    time_element.appendChild(end_time_element);
+    sidebar_element.appendChild(date_element);
+
+    container.appendChild(sidebar_element);
+    container.appendChild(main_element);
+
+ 
     
     if(config_object.show_qr_code === true)
     {
 
     let qr_element = document.createElement("div");
     qr_element.classList.add("qr_code");
-    container.appendChild(qr_element);
+    sidebar_element.appendChild(qr_element);
      // @ts-ignore
         new QRCode(qr_element, {
           text: event_array[current_index].link,
@@ -310,24 +334,10 @@ function create_slide()
       image_element.src = event_array[current_index].image;
       image_element.alt = event_array[current_index].image_alt;
       image_element.classList.add("event_image");
-      container.appendChild(image_element);
+      main_element.appendChild(image_element);
     }
 
-    if(config_object.logo !== "")
-    {
-      try {
-        let url = new URL(config_object.logo);
-      } catch (_) {
-        console.error(`${config_object.logo} is a malformed logo url. Please update it in the main.json file.`);
-        return false;  
-      }
-
-      let logo_element:HTMLImageElement = document.createElement("img");
-        logo_element.src = config_object.logo;
-        logo_element.classList.add("logo_image");
-        container.appendChild(logo_element);
-     
-      }
+    
     
 
 
