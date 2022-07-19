@@ -350,6 +350,13 @@ function create_slide()
 
 }
 
+if(video_container != null)
+      {
+      video_container.playbackRate = 0.7;
+      video_container.play();
+      console.log(video_container);
+      }
+
 // Get config information
 fetch("./main.json")
 .then(response => {
@@ -359,13 +366,8 @@ fetch("./main.json")
     console.log(data);
     config_object = data;
     
-      if(video_container != null)
-      {
-      video_container.defaultPlaybackRate = 0.2;
-      video_container.play();
-      }
-    
-    
+      
+  
     
     console.log(config_object.library_id);
 

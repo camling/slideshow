@@ -1,4 +1,3 @@
-"use strict";
 [];
 ;
 let config_object;
@@ -257,6 +256,11 @@ function create_slide() {
         setTimeout(create_slide, config_object.rotation_speed * 1000);
     }
 }
+if (video_container != null) {
+    video_container.playbackRate = 0.7;
+    video_container.play();
+    console.log(video_container);
+}
 // Get config information
 fetch("./main.json")
     .then(response => {
@@ -265,10 +269,6 @@ fetch("./main.json")
     .then(data => {
     console.log(data);
     config_object = data;
-    if (video_container != null) {
-        video_container.defaultPlaybackRate = 0.2;
-        video_container.play();
-    }
     console.log(config_object.library_id);
     if (config_object.alert !== "") {
         let alert_element = document.createElement("h1");
@@ -290,4 +290,3 @@ fetch("./main.json")
         create_slide();
     });
 });
-//# sourceMappingURL=main.js.map
