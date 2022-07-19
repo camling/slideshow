@@ -52,8 +52,7 @@ function get_current_events()
     
         return all_events;
     }
-
-   
+ 
 function remove_tags(str:string) {
   if ((str===null) || (str===''))
   return "";
