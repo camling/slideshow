@@ -5,7 +5,7 @@ let config_object:{ library_id: string, name: string, rotation_speed: number, lo
   colors:colors_array, show_qr_code: boolean, alert: string, event_type_ids:[], start_date:string, end_date:string, 
   locations:[], age_groups:[],is_ongoing:boolean, only_featured_events:boolean};
 let event_array:any = [];
-let layout_array:any = ["left","right","middle","top","bottom"];
+let layout_array:any = ["left"];
 let current_index:number = 0;
 const container = document.getElementById("container") as HTMLElement | null;
 const video_container = document.querySelector('video') as HTMLVideoElement | null;
