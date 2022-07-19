@@ -5,7 +5,7 @@ let config_object:{ library_id: string, name: string, rotation_speed: number, lo
   colors:colors_array, show_qr_code: boolean, alert: string, event_type_ids:[], start_date:string, end_date:string, 
   locations:[], age_groups:[],is_ongoing:boolean, only_featured_events:boolean};
 let event_array:any = [];
-let layout_array:any = ["left"];
+let layout_array:any = ["left", "right", "top", "bottom"];
 let current_index:number = 0;
 const container = document.getElementById("container") as HTMLElement | null;
 const video_container = document.querySelector('video') as HTMLVideoElement | null;
@@ -147,16 +147,16 @@ function get_heading_size(length:number):string
   let size:string;
   switch(true) {
     case (length < 30):
-     size = "5em";
+     size = "6rem";
       break;
     case (length < 50):
-      size = "4em";
+      size = "5rem";
       break;
     case (length < 75):
-      size = "3em";
+      size = "4rem";
         break;  
     default:
-      size = "2.5em";
+      size = "3rem";
   }
   return size;
 }
@@ -223,6 +223,7 @@ function create_slide()
     let title_element:HTMLHeadingElement = document.createElement("h1");
     let description_element:HTMLElement = document.createElement("div");
     let duration_element:HTMLHeadingElement = document.createElement("h2");
+    let time_element:HTMLElement = document.createElement("div");
     let start_time_element:HTMLHeadingElement = document.createElement("h2");
     let end_time_element:HTMLHeadElement = document.createElement("h2");
     let date_element:HTMLHeadElement = document.createElement("h2");
@@ -250,7 +251,9 @@ function create_slide()
     duration_element.classList.add("length");
     duration_element.style.fontFamily = config_object.font;
 
-    start_time_element.classList.add("time");
+    time_element.classList.add("time");
+
+    start_time_element.classList.add("start_time");
     start_time_element.style.fontFamily = config_object.font;
 
     end_time_element.classList.add("end_time");
@@ -295,8 +298,9 @@ function create_slide()
     main_element.appendChild(title_element);
     main_element.appendChild(description_element);
     sidebar_element.appendChild(duration_element);
-    sidebar_element.appendChild(start_time_element);
-    sidebar_element.appendChild(end_time_element);
+    sidebar_element.appendChild(time_element);
+    time_element.appendChild(start_time_element);
+    time_element.appendChild(end_time_element);
     sidebar_element.appendChild(date_element);
 
     container.appendChild(sidebar_element);
