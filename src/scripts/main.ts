@@ -217,6 +217,8 @@ function create_slide()
     container.innerHTML = "";
     container.className = "";
 
+    let sidebar_element:HTMLElement = document.createElement("div");
+    let main_element:HTMLElement = document.createElement("div");
     
     let title_element:HTMLHeadingElement = document.createElement("h1");
     let description_element:HTMLElement = document.createElement("div");
@@ -230,6 +232,9 @@ function create_slide()
     container.classList.add(layout_class);
     container.style.backgroundColor = hexToRgbA(config_object.colors[color_index].body, 0.5);
     container.style.height = config_object.alert === "" ? "100vh" : "85vh";
+
+    sidebar_element.classList.add("sidebar");
+    main_element.classList.add("main_slide");
     
     title_element.classList.add("event_title");
     title_element.style.color = config_object.colors[color_index].text;
@@ -274,21 +279,41 @@ function create_slide()
     end_time_element.appendChild(end_time_text);
     date_element.appendChild(date_text);
 
-    container.appendChild(title_element);
-    container.appendChild(description_element);
-    container.appendChild(duration_element);
-    container.appendChild(start_time_element);
-    container.appendChild(end_time_element);
-    container.appendChild(date_element);
-    
-    
+
+    if(config_object.logo !== "")
+    {
+      try {
+        let url = new URL(config_object.logo);
+      } catch (_) {
+        console.error(`${config_object.logo} is a malformed logo url. Please update it in the main.json file.`);
+        return false;  
+      }
+
+      let logo_element:HTMLImageElement = document.createElement("img");
+        logo_element.src = config_object.logo;
+        logo_element.classList.add("logo_image");
+        sidebar_element.appendChild(logo_element);
+     
+      }
+
+    main_element.appendChild(title_element);
+    main_element.appendChild(description_element);
+    sidebar_element.appendChild(duration_element);
+    sidebar_element.appendChild(start_time_element);
+    sidebar_element.appendChild(end_time_element);
+    sidebar_element.appendChild(date_element);
+
+    container.appendChild(sidebar_element);
+    container.appendChild(main_element);
+
+ 
     
     if(config_object.show_qr_code === true)
     {
 
     let qr_element = document.createElement("div");
     qr_element.classList.add("qr_code");
-    container.appendChild(qr_element);
+    sidebar_element.appendChild(qr_element);
      // @ts-ignore
         new QRCode(qr_element, {
           text: event_array[current_index].link,
@@ -309,24 +334,10 @@ function create_slide()
       image_element.src = event_array[current_index].image;
       image_element.alt = event_array[current_index].image_alt;
       image_element.classList.add("event_image");
-      container.appendChild(image_element);
+      main_element.appendChild(image_element);
     }
 
-    if(config_object.logo !== "")
-    {
-      try {
-        let url = new URL(config_object.logo);
-      } catch (_) {
-        console.error(`${config_object.logo} is a malformed logo url. Please update it in the main.json file.`);
-        return false;  
-      }
-
-      let logo_element:HTMLImageElement = document.createElement("img");
-        logo_element.src = config_object.logo;
-        logo_element.classList.add("logo_image");
-        container.appendChild(logo_element);
-     
-      }
+    
     
 
 
