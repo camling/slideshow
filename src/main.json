@@ -1,9 +1,9 @@
 {
     "name" : "Mount Prospect Public Library",
     "library_id" : "mppl",
-    "rotation_speed" : 60,
+    "rotation_speed" : 500,
     "font" : "Open Sans, Arial, Helvetica, sans-serif",
-    "logo": "MPPL_Logo.jpeg",
+    "logo": "https://mppl.org/wp-content/uploads/2022/04/MPPL-Mobile-App-Icon-150x150.png",
     "alert" : "",
     "show_qr_code": true,
     "colors" : [
@@ -19,5 +19,14 @@
         {"body": "#143476", "text": "white"},
         {"body": "#328ee3", "text": "white"},
         {"body": "#b4e2f0", "text": "black"}
-        ]
+        ],
+    "event_type_ids" : [],
+    "start_date" : "2022-07-22",
+    "end_date" : "2022-07-28",
+    "locations" : [],
+    "age_groups" : [],
+    "is_ongoing" : true,
+    "only_featured_events" : false
+
+
 }

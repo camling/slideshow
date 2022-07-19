@@ -1,7 +1,9 @@
 interface colors_array { body: string, text: string }[];
 interface colors_array extends Array<colors_array>{};
 
-let config_object:{ library_id: string, name: string, rotation_speed: number, font: string , colors:colors_array, show_qr_code: boolean, alert: string};
+let config_object:{ library_id: string, name: string, rotation_speed: number, logo: string, font: string, 
+  colors:colors_array, show_qr_code: boolean, alert: string, event_type_ids:[], start_date:string, end_date:string, 
+  locations:[], age_groups:[],is_ongoing:boolean, only_featured_events:boolean};
 let event_array:any = [];
 let layout_array:any = ["left","right","middle","top","bottom"];
 let current_index:number = 0;
@@ -9,12 +11,35 @@ const container = document.getElementById("container") as HTMLElement | null;
 let reset = false;
 const r:any = document.querySelector(':root');
 
+
+function url_join_event_types(id:number)
+{
+  return 'eventsTypes='+id+'&';
+}
+
+function url_join_locations(id:number)
+{
+  return 'locations='+id+'&';
+}
+
+function url_join_age_groups(id:number)
+{
+  return 'ageGroups='+id+'&';
+}
+
 function get_current_events()
     {
       async function fetch_all_calendar_events() 
         {
-          
-            const response = await fetch(`https://${config_object.library_id}.evanced.info/api/signup/eventlist?isOngoingVisible=true&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=false`);
+            let url = `https://${config_object.library_id}.evanced.info/api/signup/eventlist?
+            ${config_object.start_date ? 'startDate='+config_object.start_date+'&' : ''}
+            ${config_object.end_date ? 'endDate='+config_object.end_date+'&' : ''}
+            ${config_object.event_type_ids ? config_object.event_type_ids.map(url_join_event_types).join('') : ''}
+            ${config_object.locations ? config_object.locations.map(url_join_locations).join('') : ''}
+            ${config_object.age_groups ? config_object.age_groups.map(url_join_age_groups).join('') : ''}
+            isOngoingVisible=${config_object.is_ongoing}&isSpacesReservationVisible=false&onlyRegistrationEnabled=false&onlyFeaturedEvents=${config_object.only_featured_events}`;
+            console.log(url);
+            const response = await fetch(url);
             if (!response.ok) {
               const message = `An error has occurred: ${response.status}`;
               throw new Error(message);
@@ -182,11 +207,12 @@ function create_slide()
 
     
     let title_element:HTMLHeadingElement = document.createElement("h1");
-    let description_element:HTMLElement = document.createElement("p");
+    let description_element:HTMLElement = document.createElement("div");
     let duration_element:HTMLHeadingElement = document.createElement("h2");
     let start_time_element:HTMLHeadingElement = document.createElement("h2");
     let end_time_element:HTMLHeadElement = document.createElement("h2");
     let date_element:HTMLHeadElement = document.createElement("h2");
+    
 
     container.classList.add("container");
     container.classList.add(layout_class);
@@ -220,6 +246,8 @@ function create_slide()
     date_element.style.color = config_object.colors[color_index].text;
     date_element.style.fontFamily = config_object.font;
 
+    
+
     let title_text:Text = document.createTextNode(event_array[current_index].title);
     let description_text = event_array[current_index].description;
     let duration_text:Text = document.createTextNode(`${event_array[current_index].length} minutes`);
@@ -240,6 +268,8 @@ function create_slide()
     container.appendChild(start_time_element);
     container.appendChild(end_time_element);
     container.appendChild(date_element);
+    
+    
     
     if(config_object.show_qr_code === true)
     {
@@ -269,6 +299,22 @@ function create_slide()
       image_element.classList.add("event_image");
       container.appendChild(image_element);
     }
+
+    if(config_object.logo !== "")
+    {
+      try {
+        let url = new URL(config_object.logo);
+      } catch (_) {
+        console.error(`${config_object.logo} is a malformed logo url. Please update it in the main.json file.`);
+        return false;  
+      }
+
+      let logo_element:HTMLImageElement = document.createElement("img");
+        logo_element.src = config_object.logo;
+        logo_element.classList.add("logo_image");
+        container.appendChild(logo_element);
+     
+      }
     
 
 

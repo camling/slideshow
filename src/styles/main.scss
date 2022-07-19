@@ -44,6 +44,13 @@ span.progress_bar_fill {
     border-radius: 5px;
 }
 
+.event_description br {
+    display: none;
+}
+
+.event_description div {
+    margin-top:10px;
+}
 
 .left{
     display: grid;
@@ -94,6 +101,43 @@ span.progress_bar_fill {
 }
 .bottom{
     text-align: justify;
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+
+    .event_title{
+        grid-row-start: 3;
+        grid-column-start: 3;
+        grid-row-end: 4;
+        grid-column-end: 14;
+        -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	    animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    }
+
+    .event_description {
+        grid-area: 5/2/8/15;
+    }
+
+    .length {
+        grid-area: 4/2/4/4;
+    }
+    .time {
+        grid-area: 10/2/10/2;
+    }
+    .end_time{
+        grid-area: 10/3/10/3;
+    }
+    .date{
+        grid-area: 11/3/11/5;
+    }
+    .qr_code{
+        grid-area: 13 / 1 / 16/ 2;
+    }
+    .logo_image{
+        grid-area: 13 / 15 / 16/ 16;
+    }
 }
 
 
