@@ -163,7 +163,7 @@ function get_heading_size(length:number):string
 
 function get_description_size(length:number):string
 {
-  console.log(length);
+  console.log("Length: " + length);
 
   let size:string;
   switch(true) {
@@ -173,11 +173,11 @@ function get_description_size(length:number):string
     case (length < 100):
       size = "2.5em";
       break;
-    case (length < 250):
+    case (length < 650):
       size = "2em";
         break;  
     default:
-      size = "1.5em";
+      size = "1.3em";
   }
   return size;
 }
@@ -296,6 +296,17 @@ function create_slide()
       }
 
     main_element.appendChild(title_element);
+
+    if(event_array[current_index].image !== "")
+    {
+      console.log(event_array[current_index].image);
+      let image_element:HTMLImageElement = document.createElement("img");
+      image_element.src = event_array[current_index].image;
+      image_element.alt = event_array[current_index].image_alt;
+      image_element.classList.add("event_image");
+      main_element.appendChild(image_element);
+    }
+
     main_element.appendChild(description_element);
     sidebar_element.appendChild(duration_element);
     sidebar_element.appendChild(time_element);
@@ -327,15 +338,7 @@ function create_slide()
       
     }
    
-    if(event_array[current_index].image !== "")
-    {
-      console.log(event_array[current_index].image);
-      let image_element:HTMLImageElement = document.createElement("img");
-      image_element.src = event_array[current_index].image;
-      image_element.alt = event_array[current_index].image_alt;
-      image_element.classList.add("event_image");
-      main_element.appendChild(image_element);
-    }
+   
 
     
     
