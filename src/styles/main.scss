@@ -11,6 +11,11 @@
     font-family: Arial, Helvetica, sans-serif;
     animation: color-change-2x 1s linear alternate both;
     position: absolute;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
 }
 
 
@@ -39,11 +44,6 @@ span.progress_bar_fill {
     text-align: center;
 }
 
-.qr_code img{
-    border:solid white 15px; 
-    border-radius: 5px;
-}
-
 .event_description br {
     display: none;
 }
@@ -52,12 +52,87 @@ span.progress_bar_fill {
     margin-top:10px;
 }
 
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: white;
+
+    .logo_image{
+        order: 1;
+        max-width: 50%;
+    }
+
+    .date{
+        order: 2;
+        color: black;
+        font-size: 4rem;
+    }
+
+    .time{
+        order:3;
+        display: flex;
+        justify-content: center;
+
+        .start_time{
+            color: black;
+            margin-right:10px;
+        }
+
+        .start_time::after{
+            content:" - ";
+        }
+
+        .end_time {
+            
+            color: black;
+        }
+    }
+   
+    .length{
+        order:4;
+        color: black;
+    }
+
+    .qr_code{
+        order:5;
+    }
+}
+
+.main_slide{
+    grid-area: 1/3/9/9;
+    display: block;
+    padding: 30px;
+    margin-left: 100px;
+    margin-right: 100px;
+    background-color: rgb(255 255 255 / 40%);
+
+    .event_title{
+   
+        -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    }
+
+    .event_image{
+        width: auto;
+        max-width: 450px;
+        height: auto;
+        max-height: 450px;
+        float: left;
+        padding: 15px;
+        -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+        animation-delay: 1s;
+    }
+
+    .event_description{
+        -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+        animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+        animation-delay: 1s;
+    }
+}
+
 .left{
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
 
     .sidebar{
         grid-area: 1 / 1 / 8 / 3;
@@ -113,36 +188,14 @@ span.progress_bar_fill {
 
     .main_slide{
         grid-area: 1/3/9/9;
-        display: flex;
-        flex-direction: column;
         padding: 30px;
         margin-left: 100px;
         margin-right: 100px;
-        background-color: rgb(255 255 255 / 40%);
-
-        .event_title{
-       
-            -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-            animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-        }
-
-
-        .event_description{
-            -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-            animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-        }
-    }
-
-   
+    } 
 
 }
 
 .right{
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
 
     .sidebar{
         grid-area: 1 / 7 / 9 / 9;
@@ -198,35 +251,17 @@ span.progress_bar_fill {
 
     .main_slide{
         grid-area: 1/1/9/7;
-        display: flex;
-        flex-direction: column;
+        display: block;
         padding: 30px;
         margin-left: 100px;
         margin-right: 100px;
         background-color: rgb(255 255 255 / 40%);
 
-        .event_title{
-       
-            -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-            animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-        }
-
-
-        .event_description{
-            -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-            animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-        }
     }
 }   
 
 
 .top{
-
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
 
     .sidebar{
         grid-area: 1 / 1 / 3 / 9;
@@ -282,34 +317,15 @@ span.progress_bar_fill {
 
     .main_slide{
         grid-area: 3/1/9/9;
-        display: flex;
-        flex-direction: column;
-        padding: 30px;
+        display: block;
         margin-left: 100px;
         margin-right: 100px;
         background-color: rgb(255 255 255 / 40%);
-
-        .event_title{
-       
-            -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-            animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-        }
-
-
-        .event_description{
-            -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-            animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-        }
     }
 
     
 }
 .bottom{
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(8, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
 
     .progress_bar {
         bottom: 265px;
@@ -369,24 +385,12 @@ span.progress_bar_fill {
 
     .main_slide{
         grid-area: 1/1/7/9;
-        display: flex;
-        flex-direction: column;
+        display: block;
         padding: 30px;
         margin-left: 100px;
         margin-right: 100px;
         background-color: rgb(255 255 255 / 40%);
 
-        .event_title{
-       
-            -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-            animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-        }
-
-
-        .event_description{
-            -webkit-animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-            animation: text-focus-in 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-        }
     }
 }
 
