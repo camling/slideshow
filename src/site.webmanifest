@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "amlingSlideShow",
+    "short_name": "slideShow",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
