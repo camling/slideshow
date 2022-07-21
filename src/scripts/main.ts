@@ -394,7 +394,6 @@ fetch("./main.json")
       {
         container.before(alert_element);
       }
-      
     }
 
     get_current_events().then(events => {
