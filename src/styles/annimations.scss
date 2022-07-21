@@ -26,3 +26,12 @@
   @keyframes progress-bar {
     0% { width: 0; }
  }
+
+ @keyframes color-change-2x {
+  0% {
+    background: var(--secondary);
+  }
+  100% {
+    background: var(--main);
+  }
+}
