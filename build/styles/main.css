@@ -1,0 +1,320 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+*::before,
+*::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@-webkit-keyframes text-focus-in {
+  0% {
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+@keyframes text-focus-in {
+  0% {
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+@keyframes progress-bar {
+  0% {
+    width: 0;
+  }
+}
+@keyframes color-change-2x {
+  0% {
+    background: var(--secondary);
+  }
+  100% {
+    background: var(--main);
+  }
+}
+:root {
+  --main: #1e90ff;
+  --secondary: #ffffff;
+}
+
+.container {
+  width: 100vw;
+  font-family: Arial, Helvetica, sans-serif;
+  animation: color-change-2x 1s linear alternate both;
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.progress_bar {
+  width: 100vw;
+  height: 15px;
+  position: absolute;
+  left: 0;
+  bottom: 30px;
+}
+
+span.progress_bar_fill {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+}
+
+.alert {
+  font-size: 4rem;
+  color: white;
+  background-color: red;
+  display: block;
+  padding: 15px;
+  width: 100%;
+  height: 15vh;
+  text-align: center;
+  position: relative;
+}
+
+.event_description br {
+  display: none;
+}
+
+.event_description div {
+  margin-top: 10px;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: white;
+}
+.sidebar .logo_image {
+  order: 1;
+  max-width: 50%;
+}
+.sidebar .date {
+  order: 2;
+  color: black;
+  font-size: 4rem;
+}
+.sidebar .time {
+  order: 3;
+  display: flex;
+  justify-content: center;
+}
+.sidebar .time .start_time {
+  color: black;
+  margin-right: 10px;
+}
+.sidebar .time .start_time::after {
+  content: " - ";
+}
+.sidebar .time .end_time {
+  color: black;
+}
+.sidebar .length {
+  order: 4;
+  color: black;
+}
+.sidebar .qr_code {
+  order: 5;
+}
+
+.main_slide {
+  grid-area: 1/3/9/9;
+  display: block;
+  padding: 30px;
+  margin-left: 100px;
+  margin-right: 100px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.main_slide .event_title {
+  -webkit-animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+.main_slide .event_image {
+  width: auto;
+  max-width: 450px;
+  height: auto;
+  max-height: 450px;
+  float: left;
+  padding: 15px;
+  -webkit-animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation-delay: 1s;
+}
+.main_slide .event_description {
+  -webkit-animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  animation-delay: 1s;
+}
+
+.left .sidebar {
+  grid-area: 1/1/9/3;
+  flex-direction: column;
+  padding: 20px;
+  height: 100%;
+  text-align: center;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.left .main_slide {
+  grid-area: 1/3/9/9;
+  padding: 30px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.right .sidebar {
+  grid-area: 1/7/9/9;
+  flex-direction: column;
+  padding: 20px;
+  height: 100%;
+  text-align: center;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.right .main_slide {
+  grid-area: 1/1/9/7;
+  display: block;
+  padding: 30px;
+  margin-left: 100px;
+  margin-right: 100px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.top .sidebar {
+  grid-area: 1/1/3/9;
+  flex-direction: row;
+  padding: 20px;
+  text-align: center;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.top .main_slide {
+  grid-area: 3/1/9/9;
+  display: block;
+  margin-left: 100px;
+  margin-right: 100px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.bottom .progress_bar {
+  bottom: 265px;
+}
+.bottom .sidebar {
+  grid-area: 7/1/9/9;
+  flex-direction: row;
+  padding: 20px;
+  text-align: center;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.bottom .main_slide {
+  grid-area: 1/1/7/9;
+  display: block;
+  padding: 30px;
+  margin-left: 100px;
+  margin-right: 100px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.video-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.video-container video {
+  /* Make video to at least 100% wide and tall */
+  min-width: 100%;
+  min-height: 100%;
+  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+  width: auto;
+  height: auto;
+  /* Center the video */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

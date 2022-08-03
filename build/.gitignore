@@ -1,0 +1,9 @@
+.DS_Store
+<<<<<<< HEAD
+build/*
+config.codekit3
+=======
+config.codekit3
+test.txt
+build/*
+>>>>>>> 90174efeb3c04036fbd1b33c72eec7b1e1535782

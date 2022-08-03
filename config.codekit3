@@ -28,7 +28,7 @@
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/build\/browserconfig.xml",
+      "oAP" : "\/build\/src\/browserconfig.xml",
       "oF" : 0
     },
     "\/src\/favicon.ico" : {
@@ -36,14 +36,14 @@
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/build\/favicon.ico",
+      "oAP" : "\/build\/src\/favicon.ico",
       "oF" : 0
     },
     "\/src\/images\/android-chrome-192x192.png" : {
       "ft" : 32768,
       "iS" : 12499,
       "oA" : 0,
-      "oAP" : "\/build\/images\/android-chrome-192x192.png",
+      "oAP" : "\/build\/src\/images\/android-chrome-192x192.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 1,
@@ -56,7 +56,7 @@
       "ft" : 32768,
       "iS" : 17507,
       "oA" : 0,
-      "oAP" : "\/build\/images\/android-chrome-256x256.png",
+      "oAP" : "\/build\/src\/images\/android-chrome-256x256.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 1,
@@ -69,7 +69,7 @@
       "ft" : 32768,
       "iS" : 11550,
       "oA" : 0,
-      "oAP" : "\/build\/images\/apple-touch-icon.png",
+      "oAP" : "\/build\/src\/images\/apple-touch-icon.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 1,
@@ -83,14 +83,14 @@
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/build\/images\/background-squares.mp4",
+      "oAP" : "\/build\/src\/images\/background-squares.mp4",
       "oF" : 0
     },
     "\/src\/images\/clock.png" : {
       "ft" : 32768,
       "iS" : 8885,
       "oA" : 0,
-      "oAP" : "\/build\/images\/clock.png",
+      "oAP" : "\/build\/src\/images\/clock.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 1,
@@ -103,7 +103,7 @@
       "ft" : 32768,
       "iS" : 1095,
       "oA" : 0,
-      "oAP" : "\/build\/images\/favicon-16x16.png",
+      "oAP" : "\/build\/src\/images\/favicon-16x16.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 1,
@@ -116,7 +116,7 @@
       "ft" : 32768,
       "iS" : 1872,
       "oA" : 0,
-      "oAP" : "\/build\/images\/favicon-32x32.png",
+      "oAP" : "\/build\/src\/images\/favicon-32x32.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 1,
@@ -130,7 +130,7 @@
       "iS" : 67745,
       "jF" : 0,
       "oA" : 0,
-      "oAP" : "\/build\/images\/MPPL_Logo.jpg",
+      "oAP" : "\/build\/src\/images\/MPPL_Logo.jpg",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 1,
@@ -142,7 +142,7 @@
       "ft" : 32768,
       "iS" : 8885,
       "oA" : 0,
-      "oAP" : "\/build\/images\/mstile-150x150.png",
+      "oAP" : "\/build\/src\/images\/mstile-150x150.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 1,
@@ -155,7 +155,7 @@
       "ft" : 2097152,
       "miP" : 0,
       "oA" : 2,
-      "oAP" : "\/build\/images\/safari-pinned-tab.svg",
+      "oAP" : "\/build\/src\/images\/safari-pinned-tab.svg",
       "oF" : 0,
       "opt" : 0,
       "plM" : 52780316221407,
@@ -166,13 +166,13 @@
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/build\/index.html",
+      "oAP" : "\/build\/src\/index.html",
       "oF" : 0
     },
     "\/src\/main.json" : {
       "ft" : 524288,
       "oA" : 1,
-      "oAP" : "\/build\/main-min.json",
+      "oAP" : "\/build\/src\/main.json",
       "oF" : 0,
       "oO" : 1,
       "oS" : 1
@@ -187,7 +187,7 @@
       "ft" : 4096,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/build\/README.html",
+      "oAP" : "\/build\/src\/README.html",
       "oF" : 0,
       "oFM" : 0,
       "oS" : 0,
@@ -205,7 +205,7 @@
       "moR" : 0,
       "moT" : 2,
       "oA" : 0,
-      "oAP" : "\/build\/scripts\/main.js",
+      "oAP" : "\/build\/src\/scripts\/main.js",
       "oF" : 0,
       "rC" : 0,
       "tEC" : 0
@@ -215,7 +215,7 @@
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
-      "oAP" : "\/build\/site.webmanifest",
+      "oAP" : "\/build\/src\/site.webmanifest",
       "oF" : 0
     },
     "\/src\/styles\/annimations.scss" : {
@@ -227,7 +227,7 @@
       "ft" : 4,
       "ma" : 0,
       "oA" : 1,
-      "oAP" : "\/build\/styles\/annimations.css",
+      "oAP" : "\/build\/src\/styles\/annimations.css",
       "oF" : 0,
       "oS" : 0,
       "pg" : 0,
@@ -242,7 +242,7 @@
       "ft" : 4,
       "ma" : 0,
       "oA" : 0,
-      "oAP" : "\/build\/styles\/main.css",
+      "oAP" : "\/build\/src\/styles\/main.css",
       "oF" : 0,
       "oS" : 0,
       "pg" : 0,
@@ -257,7 +257,7 @@
       "ft" : 4,
       "ma" : 0,
       "oA" : 1,
-      "oAP" : "\/build\/styles\/reset.css",
+      "oAP" : "\/build\/src\/styles\/reset.css",
       "oF" : 0,
       "oS" : 0,
       "pg" : 0,
@@ -1546,8 +1546,8 @@
       "transpilerStyle" : 1
     },
     "languageDefaultsCSS" : {
-      "autoOutputAction" : 0,
-      "autoOutputPathFilenamePattern" : "*-min.css",
+      "autoOutputAction" : 2,
+      "autoOutputPathFilenamePattern" : "*.css",
       "autoOutputPathRelativePath" : "",
       "autoOutputPathReplace1" : "",
       "autoOutputPathReplace2" : "",
@@ -1599,7 +1599,7 @@
     },
     "languageDefaultsJS" : {
       "autoOutputAction" : 0,
-      "autoOutputPathFilenamePattern" : "*-min.js",
+      "autoOutputPathFilenamePattern" : "*.js",
       "autoOutputPathRelativePath" : "\/min",
       "autoOutputPathReplace1" : "",
       "autoOutputPathReplace2" : "",
@@ -1611,8 +1611,8 @@
       "transpilerStyle" : 0
     },
     "languageDefaultsJSON" : {
-      "autoOutputAction" : 1,
-      "autoOutputPathFilenamePattern" : "*-min.json",
+      "autoOutputAction" : 0,
+      "autoOutputPathFilenamePattern" : "*.json",
       "autoOutputPathRelativePath" : "",
       "autoOutputPathReplace1" : "",
       "autoOutputPathReplace2" : "",
@@ -1755,7 +1755,7 @@
       "sourceMapStyle" : 0
     },
     "languageDefaultsSVG" : {
-      "autoOutputAction" : 2,
+      "autoOutputAction" : 0,
       "autoOutputPathFilenamePattern" : "*.svg",
       "autoOutputPathRelativePath" : "",
       "autoOutputPathReplace1" : "",
@@ -1830,7 +1830,7 @@
     ],
     "rollupTreeshakingEnabled" : 1,
     "skippedFoldersString" : "log, _logs, logs, _cache, cache, .idea, \/storage\/framework\/sessions, node_modules",
-    "sourceFolderName" : "src",
+    "sourceFolderName" : "source",
     "susyVersion" : 3,
     "tsAllowSyntheticDefaultImports" : 0,
     "tsAllowUnreachableCode" : 0,
@@ -2155,7 +2155,7 @@
     "webpPresets" : {
 
     },
-    "websiteRelativeRoot" : "build"
+    "websiteRelativeRoot" : ""
   },
   "settingsFileVersion" : "3"
 }
