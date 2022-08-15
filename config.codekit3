@@ -23,6 +23,25 @@
       "oAP" : "\/build\/build",
       "oF" : 0
     },
+    "\/README.md" : {
+      "cB" : 0,
+      "cS" : 0,
+      "eF" : 1,
+      "eL" : 1,
+      "ema" : 1,
+      "eSQ" : 1,
+      "ft" : 4096,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/build\/README.html",
+      "oF" : 0,
+      "oFM" : 0,
+      "oS" : 0,
+      "pHT" : 0,
+      "pME" : 1,
+      "rFN" : 0,
+      "uCM" : 0
+    },
     "\/src\/browserconfig.xml" : {
       "cB" : 0,
       "ft" : 8192,
@@ -177,25 +196,6 @@
       "oO" : 1,
       "oS" : 1
     },
-    "\/src\/README.md" : {
-      "cB" : 0,
-      "cS" : 0,
-      "eF" : 1,
-      "eL" : 1,
-      "ema" : 1,
-      "eSQ" : 1,
-      "ft" : 4096,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/build\/README.html",
-      "oF" : 0,
-      "oFM" : 0,
-      "oS" : 0,
-      "pHT" : 0,
-      "pME" : 1,
-      "rFN" : 0,
-      "uCM" : 0
-    },
     "\/src\/scripts\/main.ts" : {
       "cDF" : 0,
       "ft" : 128,
@@ -276,7 +276,7 @@
     "displayValueWasSetByUser" : 0,
     "iconImageName" : "\/src\/images\/apple-touch-icon.png",
     "iconImageWasSetByUser" : 0,
-    "lastBuiltDate" : 680710869.63456202
+    "lastBuiltDate" : 682281572.36971998
   },
   "projectSettings" : {
     "abortBuildOnError" : 1,
