@@ -338,10 +338,6 @@ function create_slide()
       
     }
    
-   
-
-    
-    
 
 
     progress_bar(color_index);
